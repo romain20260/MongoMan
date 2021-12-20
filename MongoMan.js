@@ -43,21 +43,20 @@ async insertOne(collection,data)
         console.log(error);
     }      
 } 
-///TODO to test ?????
 /**method to insert multiple documents to a collection
  * 
  * @param {string} collection -the name of wish collection  you wanna add your document can exist or not (the collection will be create)
- * @param {Array<object>} data - represent a array of objects representing each the document json to insert
+ * @param {Array<object>} arr - represent a array of objects representing each the document json to insert
  * @throws {InvalidArgumentException} throw an error if the type of argument collection is not a string OR argument arr is not a array
  */
 async insertMany(collection,arr)
 {
     try {
         //////check the arg type insert by the caller 
-        collection = (typeof collection === "string")? collection : (function(){throw `IN function insertOne firts arg should be a string representing the collection to store the document if the collection is not create, a collection will be create by the process`}());
-        arr = (typeof arr === "array")? arr : (function(){throw `IN function insertOne second arg should be a array of object respresenting the documents to insert into database`}());
+        collection = (typeof collection === "string")? collection : (function(){throw `IN function insertMany firts arg should be a string representing the collection to store the document if the collection is not create, a collection will be create by the process`}());
+        arr = (Array.isArray(arr))? arr : (function(){throw `IN function insertMany second arg should be a array of object respresenting the documents to insert into database`}());
         /////////////////////////////////////////////
-        let collect = this.#getCo(collection);
+        let collect = await this.#getCo(collection);
         collect.insertMany(arr);//execute the query 
     } catch (error) {
         console.log(error);
@@ -66,7 +65,7 @@ async insertMany(collection,arr)
 /**method to find One document from a collection
  * 
  * @param {string} collection -the name of target collection where you can find the document
- * @param {object} data - a object represent the query of your request 
+ * @param {object} query - a object represent the query of your request 
  * @param {object} [options] - if you wanna specify optionnal options to your request
  * @throws {InvalidArgumentException} throw an error if the type of argument collection is not a string OR argument query is not a object OR argument options is present and isn't a object
  * @returns {promise<object>} - object of your request
@@ -91,7 +90,7 @@ async findByOne(collection,query,options){
 /**method to find Multiple documents from a collection
  * 
  * @param {string} collection -the name of target collection where you can find the documents
- * @param {object} data - a object represent the query of your request 
+ * @param {object} query - a object represent the query of your request 
  * @param {object} [options] - if you wanna specify optionnal options to your request
  * @throws {InvalidArgumentException} throw an error if the type of argument collection is not a string OR argument query is not a object OR argument options is present and isn't a object
  * @returns {promise<array<object>>} - a array of objects of your request
