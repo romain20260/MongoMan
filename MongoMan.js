@@ -54,10 +54,10 @@ async insertMany(collection,arr)
 {
     try {
         //////check the arg type insert by the caller 
-        collection = (typeof collection === "string")? collection : (function(){throw `IN function insertOne firts arg should be a string representing the collection to store the document if the collection is not create, a collection will be create by the process`}());
-        arr = (typeof arr === "array")? arr : (function(){throw `IN function insertOne second arg should be a array of object respresenting the documents to insert into database`}());
+        collection = (typeof collection === "string")? collection : (function(){throw `IN function insertMany firts arg should be a string representing the collection to store the document if the collection is not create, a collection will be create by the process`}());
+        arr = (Array.isArray(arr))? arr : (function(){throw `IN function insertMany second arg should be a array of object respresenting the documents to insert into database`}());
         /////////////////////////////////////////////
-        let collect = this.#getCo(collection);
+        let collect = await this.#getCo(collection);
         collect.insertMany(arr);//execute the query 
     } catch (error) {
         console.log(error);
