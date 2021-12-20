@@ -1,0 +1,20 @@
+{
+  "name": "mongoman",
+  "version": "1.0.0",
+  "description": "wrapper client mongoDB official ",
+  "main": "MongoMan.js",
+  "scripts": {
+    "test": "node ./test/test.js"
+  },
+  "keywords": [
+    "mongodb",
+    "mongo",
+    "mongoCRUD"
+  ],
+  "author": "romain bousquie",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "mongodb": "^4.2.2"
+  }
+}
