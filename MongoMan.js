@@ -13,11 +13,9 @@ class MongoMan{
      */
     #client
     #dbName
-
     constructor(dbConnection=process.env.DB_CONNECT,dbName=process.env.DB_NAME){
     this.#client = new MongoClient(dbConnection);
     this.#dbName = dbName
-
     }
 //private function to return the connection
 async #getCo(collection){
@@ -34,15 +32,18 @@ async insertOne(collection,data)
 {
     try {
         //////check the arg type insert by the caller 
-        collection = (typeof collection === "string")? collection : (function(){throw `IN function insertOne firts arg should be a string representing the collection to store the document if the collection is not create, a collection will be create by the process`}());
-        data = (typeof data === "object")? data : (function(){throw `IN function insertOne second arg should be a object respresenting the document to insert into database`}());
+        collection = (typeof collection === "string")? collection : (function(){throw new TypeError(`IN insertOne() firts argument should be a valid string`)}());
+        data = (typeof data === "object")? data : (function(){throw new TypeError (`IN insertOne() second arguments should be a valid object`)}());
         /////////////////////////////////////////////
         let collect = await this.#getCo(collection);
-        collect.insertOne(data);//execute the query 
+        collect.insertOne(data);//execute the query
+        return true
     } catch (error) {
-        console.log(error);
+
+        return error
     }      
 } 
+//TODO continue the test unit below
 /**method to insert multiple documents to a collection
  * 
  * @param {string} collection -the name of wish collection  you wanna add your document can exist or not (the collection will be create)
@@ -53,13 +54,14 @@ async insertMany(collection,arr)
 {
     try {
         //////check the arg type insert by the caller 
-        collection = (typeof collection === "string")? collection : (function(){throw `IN function insertMany firts arg should be a string representing the collection to store the document if the collection is not create, a collection will be create by the process`}());
-        arr = (Array.isArray(arr))? arr : (function(){throw `IN function insertMany second arg should be a array of object respresenting the documents to insert into database`}());
+        collection = (typeof collection === "string")? collection : (function(){throw new TypeError(`IN insertMany() firts argument should be a valid string`)}());
+        arr = (Array.isArray(arr))? arr : (function(){throw new TypeError(`IN insertMany second arg should be a array of objects`)}());
         /////////////////////////////////////////////
         let collect = await this.#getCo(collection);
         collect.insertMany(arr);//execute the query 
     } catch (error) {
         console.log(error);
+        return error
     }       
 } 
 /**method to find One document from a collection
@@ -73,17 +75,18 @@ async insertMany(collection,arr)
 async findByOne(collection,query,options){
     try {
         //////check the arg type insert by the caller 
-        collection = (typeof collection === "string")? collection : (function(){throw `IN function findByOne firts arg should be a string representing the collection where the document is stored`}());
-        query = (typeof query === "object")? query : (function(){throw `IN function findByOne second arg should be a object respresenting the query to execute `}());
-        options = (!options || typeof options === "object")? options : (function(){throw `IN function findByOne third(optionnel) arg should be a object respresenting the options of the query to execute `}());
+        collection = (typeof collection === "string")? collection : (function(){throw new TypeError (`IN function IN findByOne() firts argument should be a valid string firts arg should be a string representing the collection where the document is stored`)}());
+        query = (typeof query === "object")? query : (function(){throw new TypeError(`in findByOne() the second argument should be a valid object`)}());
+        options = (!options || typeof options === "object")? options : (function(){throw new TypeError(`in findByOne() the third argument should be a valid object`)}());
         /////////////////////////////////////////////
         let collect = await this.#getCo(collection);//made the connection 
         let result = collect.findOne(query,options)
         //TODO can we checj inside dbmongo official client if we can catch the error like to precise if the name of collection does'nt exist
-        result = (result === null)?(function(){throw `type null , check if the name of collection is correct also if the query is correct OR we can't find any match in the database`}()):result;
+        result = (result === null)?(function(){throw new Error (`can find any result on your request, check twice pls your collection name and query object`)}()):result;
         return result
     } catch (error) {
         console.log(error);
+        return error
     }
 }
 //TODO add possibilites to retrieve a object of objects instead of a array 
@@ -98,9 +101,9 @@ async findByOne(collection,query,options){
 async findMulti(collection,query,options){
     try {
          //////check the arg type insert by the caller 
-         collection = (typeof collection === "string")? collection : (function(){throw `IN function findByMulti arg should be a string representing the collection where the document is stored`}());
-         query = (typeof query === "object")? query : (function(){throw `IN function findMulti second arg should be a object respresenting the query to execute `}());
-         options = (!options || typeof options === "object")? options : (function(){throw `IN function findMulti third(optionnel) arg should be a object respresenting the options of the query to execute `}());
+        collection = (typeof collection === "string")? collection : (function(){throw new TypeError (`IN function IN findMulti() firts argument should be a valid string firts arg should be a string representing the collection where the document is stored`)}());
+        query = (typeof query === "object")? query : (function(){throw new TypeError(`in findMulti() the second argument should be a valid object`)}());
+        options = (!options || typeof options === "object")? options : (function(){throw new TypeError(`in findMulti() the third argument should be a valid object`)}());
          /////////////////////////////////////////////
         let collect = await this.#getCo(collection);
         let cursor = collect.find(query,options)//that return a object call Cursor that a can call the methaod toarray to parse the reslut a put in a array 
@@ -109,6 +112,7 @@ async findMulti(collection,query,options){
         return cursor.toArray()
     } catch (error) {
         console.log(error);
+        return error
     }
 }
 ///
@@ -125,9 +129,9 @@ async findMulti(collection,query,options){
 async deleteOne(collection,query,options){
     try {
         //////check the arg type insert by the caller 
-        collection = (typeof collection === "string")? collection : (function(){throw `IN function DeleteOne firts arg should be a string representing the collection where the document is stored`}());
-        query = (typeof query === "object")? query : (function(){throw `IN function deleteOne second arg should be a object respresenting the query to execute `}());
-        options = (!options || typeof options === "object")? options : (function(){throw `IN function DeleteOne third(optionnel) arg should be a object respresenting the options of the query to execute `}());
+        collection = (typeof collection === "string")? collection : (function(){throw new TypeError (`IN function IN deleteOne() firts argument should be a valid string firts arg should be a string representing the collection where the document is stored`)}());
+        query = (typeof query === "object")? query : (function(){throw new TypeError(`in deleteOne() the second argument should be a valid object`)}());
+        options = (!options || typeof options === "object")? options : (function(){throw new TypeError(`in deleteOne() the third argument should be a valid object`)}());
         /////////////////////////////////////////////
         let collect = await this.#getCo(collection)
         let result = await collect.deleteOne(query,options)//delete return une promise
@@ -160,9 +164,9 @@ async deleteOne(collection,query,options){
 async deleteMany(collection,query,options){
     try {
         //////check the arg type insert by the caller 
-        collection = (typeof collection === "string")? collection : (function(){throw `IN function deleteMany firts arg should be a string representing the collection where the document is stored`}());
-        query = (typeof query === "object")? query : (function(){throw `IN function DeleteMany second arg should be a object respresenting the query to execute `}());
-        options = (!options || typeof options === "object")? options : (function(){throw `IN function deleteMany third(optionnel) arg should be a object respresenting the options of the query to execute `}());
+        collection = (typeof collection === "string")? collection : (function(){throw new TypeError (`IN function IN deleteMany() firts argument should be a valid string firts arg should be a string representing the collection where the document is stored`)}());
+        query = (typeof query === "object")? query : (function(){throw new TypeError(`in deleteMany() the second argument should be a valid object`)}());
+        options = (!options || typeof options === "object")? options : (function(){throw new TypeError(`in deleteMany() the third argument should be a valid object`)}());
         /////////////////////////////////////////////
 
         let collect = await this.#getCo(collection)
