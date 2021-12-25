@@ -1,4 +1,4 @@
-const MongoMan = require('../MongoMan');
+const MongoMan = require('../../MongoMan');
 const assert = require('chai').assert;
 const expect = require('chai').expect;
 require('dotenv').config();

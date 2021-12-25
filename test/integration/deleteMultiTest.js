@@ -1,4 +1,4 @@
-const MongoMan = require('../MongoMan');
+const MongoMan = require('../../MongoMan');
 const assert = require('chai').assert;
 const expect = require('chai').expect;
 require('dotenv').config();
@@ -47,7 +47,7 @@ beforeEach(async function (){
                     }
         })  
 })
-describe("if you r deleted only 1 document",function(){
+describe("if you arer deleted only 1 document",function(){
 
     beforeEach("insertion..",async function(){
         let result = new MongoMan();
