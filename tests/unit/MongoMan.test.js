@@ -6,13 +6,14 @@ describe('mongoMan', ()=>{
 
                     test("no params ...its binding with env Var by default)" ,()=>
                     {
-                        let test = new MongoMan()
-                        expect(test).toBeInstanceOf(MongoMan)
+                        expect(new MongoMan()).toBeInstanceOf(MongoMan)
+                    })
+                    test("params input define in constructu",()=>{
+                        expect(new MongoMan(process.env.TEST_DB_CONNECT,process.env.TEST_DB_NAME)).toBeInstanceOf(MongoMan);
                     })
                     test("make sure private things is not accessible outside class",()=>{
-                        let result = new MongoMan()
-                        expect(result).not.toHaveProperty("#client")
-                        expect(result).not.toHaveProperty("#dbName")
+                        expect(new MongoMan()).not.toHaveProperty("#client")
+                        expect(new MongoMan()).not.toHaveProperty("#dbName")
                     }) 
         })
        

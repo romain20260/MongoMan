@@ -22,6 +22,19 @@ async #getCo(collection){
     await this.#client.connect();//made the connection 
         return this.#client.db(this.#dbName).collection(collection);//return the connection with the collection target 
 }
+
+/**method to insert one document to a collection
+ * @param {string} collection -the name of wish collection you wanna delete in your database WARNING it will delete the collection and all documents associated
+ * @throws {TypeError|serverMongoError} - if the metrhod didn't match the collection it will return serverMongoError "ns not found" 
+ * @returns {true}
+ */
+async documentDelete(collection){
+        ValidatorMan.collectionValidation(collection)
+        await this.#client.connect();
+        await this.#client.db(this.#dbName).dropCollection(collection)
+        this.#client.close()
+        return true
+}
 /**method to insert one document to a collection
  * @param {string} collection -the name of wish collection  you wanna add your document can exist or not (the collection will be create)
  * @param {object} data - represent the document json to insert
@@ -48,10 +61,12 @@ async insertMany(collection,arr)
 {   
         ValidatorMan.collectionValidation(collection)
         ValidatorMan.arrDataValidation(arr)
-        let collect = await this.#getCo(collection);
-        collect.insertMany(arr);//execute the query 
+        let collect = await this.#getCo(collection)
+        await collect.insertMany(arr);//execute the query
+        this.#client.close()
         return true  
-} 
+}
+///TODO refact below point and rewrite unit test 
 /**method to find One document from a collection
  * 
  * @param {string} collection -the name of target collection where you can find the document

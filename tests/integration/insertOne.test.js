@@ -2,7 +2,7 @@
 const MongoMan = require('../../MongoMan');
 const {MongoClient} = require('mongodb');
 require('dotenv').config();
-let man = new MongoMan
+let man = new MongoMan(process.env.TEST_DB_CONNECT,process.env.TEST_DB_NAME)
 
 describe("insertOne()", function(done){
  
@@ -18,11 +18,10 @@ describe("insertOne()", function(done){
     ('message arr ', async (query) => {
         await expect(man.insertOne("TESTinsertOne",query)).rejects.toThrow("data input should be a valid object")
     });
-    ///feature delette datacollection
     afterAll( () => {
-        let cleanup = new MongoClient(process.env.DB_CONNECT)
+        let cleanup = new MongoClient(process.env.TEST_DB_CONNECT)
             cleanup.connect(()=>{
-                let db = cleanup.db(process.env.DB_NAME)
+                let db = cleanup.db(process.env.TEST_DB_NAME)
                 db.dropCollection("TESTinsertOne").then(()=>cleanup.close())
             }) 
     })
