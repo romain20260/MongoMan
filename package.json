@@ -4,9 +4,9 @@
   "description": "wrapper client mongoDB official ",
   "main": "MongoMan.js",
   "scripts": {
-    "test": "jest",
-    "testInt": "jest tests/integration",
-    "testUni" : "jest tests/unit"
+    "test": "jest --detectOpenHandles",
+    "testInt": "jest tests/integration --detectOpenHandles",
+    "testUni" : "jest tests/unit --detectOpenHandles"
   },
   "keywords": [
     "mongodb",

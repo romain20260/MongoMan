@@ -1,7 +1,3 @@
-/**
- * abstract class representing a valitor 
- * 
- */
 class ValidatorMan{
 
 static collectionValidation(collection){

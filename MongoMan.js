@@ -66,7 +66,7 @@ async insertMany(collection,arr)
         this.#client.close()
         return true  
 }
-///TODO refact below point and rewrite unit test 
+
 /**method to find One document from a collection
  * 
  * @param {string} collection -the name of target collection where you can find the document
@@ -83,10 +83,12 @@ async findByOne(collection,query,options){
   
         let collect = await this.#getCo(collection);
         let result = await collect.findOne(query,options)
+        this.#client.close()
         result = (result === null)?function(){throw new Error (`can find any result on your request, check twice pls your collection name and query object`)}():result;
         return result
   
 }
+
 //TODO add possibilites to retrieve a object of objects instead of a array 
 /**method to find Multiple documents from a collection
  * 
@@ -106,11 +108,11 @@ async findMulti(collection,query,options){
         let cursor = collect.find(query,options)
         let many = await cursor.count();
         (many>0)? many:function(){throw new Error(`we did not find any documents`)}();
-        return cursor.toArray()
-
+        let result = await cursor.toArray()
+        this.#client.close()
+        return result
 }
-///
-///
+//TODO refact below point and rewrite unit test 
 /**method to delete one document from a collection
  * 
  * @param {string} collection -the name of target collection where you wanna delete the document
