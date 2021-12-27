@@ -149,7 +149,194 @@
     
 
     
-    <h4 class="name" id="deleteMany"><span class="type-signature">(async) </span>deleteMany<span class="signature">(collection, data, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="collectionDelete"><span class="type-signature">(async) </span>collectionDelete<span class="signature">(collection)</span><span class="type-signature"> &rarr; {true}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    method to insert one document to a collection
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>collection</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the name of wish collection you wanna delete in your database WARNING it will delete the collection and all documents associated</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="MongoMan.js.html">MongoMan.js</a>, <a href="MongoMan.js.html#line31">line 31</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        - if the metrhod didn't match the collection it will return serverMongoError "ns not found"
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">TypeError</span>
+|
+
+<span class="param-type">serverMongoError</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">true</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="deleteMany"><span class="type-signature">(async) </span>deleteMany<span class="signature">(collection, query, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {number}</span></h4>
     
 
     
@@ -226,7 +413,7 @@
 
         <tr>
             
-                <td class="name"><code>data</code></td>
+                <td class="name"><code>query</code></td>
             
 
             <td class="type">
@@ -324,7 +511,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="MongoMan.js.html">MongoMan.js</a>, <a href="MongoMan.js.html#line145">line 145</a>
+        <a href="MongoMan.js.html">MongoMan.js</a>, <a href="MongoMan.js.html#line144">line 144</a>
     </li></ul></dd>
     
 
@@ -365,7 +552,7 @@
             </dt>
             <dd>
                 
-<span class="param-type">InvalidArgumentException</span>
+<span class="param-type">TypeError</span>
 
 
             </dd>
@@ -409,7 +596,7 @@
 
         
 <div class="param-desc">
-    - a sucess message
+    - number of deleted documents you've done
 </div>
 
 
@@ -420,7 +607,7 @@
     </dt>
     <dd>
         
-<span class="param-type">string</span>
+<span class="param-type">number</span>
 
 
     </dd>
@@ -438,7 +625,7 @@
     
 
     
-    <h4 class="name" id="deleteOne"><span class="type-signature">(async) </span>deleteOne<span class="signature">(collection, data, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="deleteOne"><span class="type-signature">(async) </span>deleteOne<span class="signature">(collection, data, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {true}</span></h4>
     
 
     
@@ -654,7 +841,7 @@
             </dt>
             <dd>
                 
-<span class="param-type">InvalidArgumentException</span>
+<span class="param-type">TypeError</span>
 
 
             </dd>
@@ -692,197 +879,6 @@
 
 </li>
     </ul>
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - a sucess message
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="documentDelete"><span class="type-signature">(async) </span>documentDelete<span class="signature">(collection)</span><span class="type-signature"> &rarr; {true}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    method to insert one document to a collection
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>collection</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the name of wish collection you wanna delete in your database WARNING it will delete the collection and all documents associated</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="MongoMan.js.html">MongoMan.js</a>, <a href="MongoMan.js.html#line31">line 31</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Throws:</h5>
-
-        
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        - if the metrhod didn't match the collection it will return serverMongoError "ns not found"
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">TypeError</span>
-|
-
-<span class="param-type">serverMongoError</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-
-    
 
 
 <h5>Returns:</h5>
@@ -1130,7 +1126,7 @@
             </dt>
             <dd>
                 
-<span class="param-type">InvalidArgumentException</span>
+<span class="param-type">TypeError</span>
 
 
             </dd>
@@ -1392,7 +1388,7 @@
             </dt>
             <dd>
                 
-<span class="param-type">InvalidArgumentException</span>
+<span class="param-type">TypeError</span>
 
 
             </dd>
@@ -1592,7 +1588,7 @@
 <dl>
     <dt>
         <div class="param-desc">
-        throw an error if the type of argument collection is not a string OR argument arr is not a array
+        -throw an error if the type of argument collection is not a string OR argument arr is not a array
         </div>
     </dt>
     <dd></dd>
@@ -1796,14 +1792,28 @@
 
         
 
-    <div class="param-desc">
-    
-        
+<dl>
+    <dt>
+        <div class="param-desc">
+        -throw an error if the type of argument collection is not a string OR argument arr is not a array
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
 <span class="param-type">TypeError</span>
 
 
-    
-    </div>
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
 
 
     
@@ -1821,6 +1831,533 @@
     <dd>
         
 <span class="param-type">true</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="updateMany"><span class="type-signature">(async) </span>updateMany<span class="signature">(collection, query, update, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    method to update many documents from a collection
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>collection</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">the name of target collection where you wanna delete the documents</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>query</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The filter used to select the documents to update</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>update</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The update operations to be applied to the document</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">if you wanna specify optionnal options to your request</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="MongoMan.js.html">MongoMan.js</a>, <a href="MongoMan.js.html#line182">line 182</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        throw an error if the type of argument collection is not a string OR argument query is not a object OR argument options is present and isn't a object
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">TypeError</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - number of documents has been modified
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="updateOne"><span class="type-signature">(async) </span>updateOne<span class="signature">(collection, query, update)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    method to update one documents from a collection
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>collection</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the name of target collection where you wanna delete the document</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>query</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The filter used to select the document to update</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>update</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The update operations to be applied to the document</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="MongoMan.js.html">MongoMan.js</a>, <a href="MongoMan.js.html#line162">line 162</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        throw an error if the type of argument collection is not a string OR argument query is not a object OR argument options is present and isn't a object
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">TypeError</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - number of documents has been modified
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
 
 
     </dd>
@@ -1854,7 +2391,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Dec 26 2021 09:38:58 GMT+0100 (heure normale d’Europe centrale)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Mon Dec 27 2021 18:39:49 GMT+0100 (heure normale d’Europe centrale)
 </footer>
 
 <script> prettyPrint(); </script>

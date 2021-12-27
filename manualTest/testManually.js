@@ -1,8 +1,7 @@
 const MongoMan = require('../MongoMan');
 
-let tester = new MongoMan();
-let collection = "testOne";
-//TODO make differentes solution to clean the chaining then()
+let tester = new MongoMan(process.env.TEST_DB_CONNECT,process.env.TEST_DB_NAME);
+let collection = "test";
 //simple CRUD test
 ///////create
 //1

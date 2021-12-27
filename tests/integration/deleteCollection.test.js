@@ -10,15 +10,15 @@ describe('deleteCollection', () => {
         await expect(man.insertOne("deleteCollection",{title:"should not appaer"},{})).resolves.toBe(true);
     })
     test('should return True', async () => {
-       await expect(man.documentDelete("deleteCollection")).resolves.toBe(true)
+       await expect(man.collectionDelete("deleteCollection")).resolves.toBe(true)
     })
     //TODO catch mongoservererror and custom it 
     test('should throw error ', async () => {
-        await expect(man.documentDelete("doesntExist")).rejects.toThrow(MongoServerError)
+        await expect(man.collectionDelete("doesntExist")).rejects.toThrow(MongoServerError)
     });
     test.each(["",1,["a"],{"a":"a"},[],{}])
     ('should trows error TypeError',async collection => {
-            await expect(man.documentDelete(collection)).rejects.toThrow(TypeError)
+            await expect(man.collectionDelete(collection)).rejects.toThrow(TypeError)
         }
     );
     afterAll( () => {

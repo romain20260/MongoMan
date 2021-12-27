@@ -28,7 +28,7 @@ async #getCo(collection){
  * @throws {TypeError|serverMongoError} - if the metrhod didn't match the collection it will return serverMongoError "ns not found" 
  * @returns {true}
  */
-async documentDelete(collection){
+async collectionDelete(collection){
         ValidatorMan.collectionValidation(collection)
         await this.#client.connect();
         await this.#client.db(this.#dbName).dropCollection(collection)
@@ -38,7 +38,7 @@ async documentDelete(collection){
 /**method to insert one document to a collection
  * @param {string} collection -the name of wish collection  you wanna add your document can exist or not (the collection will be create)
  * @param {object} data - represent the document json to insert
- * @throws {TypeError}
+ * @throws {TypeError} -throw an error if the type of argument collection is not a string OR argument arr is not a array
  * @returns {true}
  */
 async insertOne(collection,data)
@@ -54,7 +54,7 @@ async insertOne(collection,data)
  * 
  * @param {string} collection -the name of wish collection  you wanna add your document can exist or not (the collection will be create)
  * @param {Array<object>} arr - represent a array of objects representing each the document json to insert
- * @throws {TypeError} throw an error if the type of argument collection is not a string OR argument arr is not a array
+ * @throws {TypeError} -throw an error if the type of argument collection is not a string OR argument arr is not a array
  * @returns {true}
  */
 async insertMany(collection,arr)
@@ -72,7 +72,7 @@ async insertMany(collection,arr)
  * @param {string} collection -the name of target collection where you can find the document
  * @param {object} query - a object represent the query of your request 
  * @param {object} [options] - if you wanna specify optionnal options to your request
- * @throws {InvalidArgumentException} throw an error if the type of argument collection is not a string OR argument query is not a object OR argument options is present and isn't a object
+ * @throws {TypeError} throw an error if the type of argument collection is not a string OR argument query is not a object OR argument options is present and isn't a object
  * @returns {promise<object>} - object of your request
  */
 async findByOne(collection,query,options){
@@ -88,14 +88,12 @@ async findByOne(collection,query,options){
         return result
   
 }
-
-//TODO add possibilites to retrieve a object of objects instead of a array 
 /**method to find Multiple documents from a collection
  * 
  * @param {string} collection -the name of target collection where you can find the documents
  * @param {object} query - a object represent the query of your request 
  * @param {object} [options] - if you wanna specify optionnal options to your request
- * @throws {InvalidArgumentException} throw an error if the type of argument collection is not a string OR argument query is not a object OR argument options is present and isn't a object
+ * @throws {TypeError} throw an error if the type of argument collection is not a string OR argument query is not a object OR argument options is present and isn't a object
  * @returns {promise<array<object>>} - a array of objects of your request
  */
 async findMulti(collection,query,options){
@@ -112,57 +110,85 @@ async findMulti(collection,query,options){
         this.#client.close()
         return result
 }
-//TODO refact below point and rewrite unit test 
+
 /**method to delete one document from a collection
  * 
  * @param {string} collection -the name of target collection where you wanna delete the document
  * @param {object} data - a object represent the query of your request 
  * @param {object} [options] - if you wanna specify optionnal options to your request
- * @throws {InvalidArgumentException} throw an error if the type of argument collection is not a string OR argument query is not a object OR argument options is present and isn't a object
+ * @throws {TypeError} throw an error if the type of argument collection is not a string OR argument query is not a object OR argument options is present and isn't a object
  * @throws {ProcessError} throw an error if the request fail 
- * @returns {string} - a sucess message 
+ * @returns {true} 
  */
 async deleteOne(collection,query,options){
     
         ValidatorMan.collectionValidation(collection)
         ValidatorMan.queryValidation(query)
         ValidatorMan.optionsValidation(options)
-
+        if (Object.keys(query).length === 0 && query.constructor === Object)throw new TypeError("input query object should not be empty");
+        
         let collect = await this.#getCo(collection)
-        collect.deleteOne(query,options)
-       
-        return "success you have deleted 1 document";
-  
+        await collect.deleteOne(query,options)
+        this.#client.close()
+        return true;
 }
-///
 /**method to delete many documents from a collection
  * 
  * @param {string} collection -the name of target collection where you wanna delete the documents
- * @param {object} data - a object represent the query of your request if is EMPTY object it will deleted all documents in the collections
+ * @param {object} query - a object represent the query of your request if is EMPTY object it will deleted all documents in the collections
  * @param {object} [options] - if you wanna specify optionnal options to your request
- * @throws {InvalidArgumentException} throw an error if the type of argument collection is not a string OR argument query is not a object OR argument options is present and isn't a object
+ * @throws {TypeError} throw an error if the type of argument collection is not a string OR argument query is not a object OR argument options is present and isn't a object
  * @throws {ProcessError} throw an error if the request fail 
- * @returns {string} - a sucess message 
+ * @returns {number} - number of deleted documents you've done  
  */
 async deleteMany(collection,query,options){
-  
         ValidatorMan.collectionValidation(collection)
         ValidatorMan.queryValidation(query)
         ValidatorMan.optionsValidation(options)
 
         let collect = await this.#getCo(collection)
         let result = await collect.deleteMany(query,options)
+        this.#client.close()
+        return result.deletedCount
+}
+/**method to update one documents from a collection
+ * 
+ * @param {string} collection -the name of target collection where you wanna delete the document
+ * @param {object} query - The filter used to select the document to update
+ * @param {object} update - The update operations to be applied to the document
+ * @throws {TypeError} throw an error if the type of argument collection is not a string OR argument query is not a object OR argument options is present and isn't a object
+ * @returns {number} - number of documents has been modified
+ */
+async updateOne(collection,query,update){
+        ValidatorMan.collectionValidation(collection)
+        ValidatorMan.queryValidation(query)
+        ValidatorMan.updateValidation(update)
 
-        //TODO refacto to ternairy condition return 
-        if(result.deletedCount === 1){
-            return"you have only 1 document match you query it be deleted";
-        }
-        else if (result.deletedCount > 1 ){
-            return`deleted count : ${result.deletedCount}`;
-        }
-        else{
-            throw `a error occured you didn't delete any document`
-        }
+        let collect = await this.#getCo(collection)
+        let result = await collect.updateOne(query,update)
+        this.#client.close()
+        return result.modifiedCount
+
+}
+/**method to update many documents from a collection
+ * 
+ * @param {string} collection -the name of target collection where you wanna delete the documents
+ * @param {object} query - The filter used to select the documents to update
+ * @param {object} update - The update operations to be applied to the document
+ * @param {object} [options] - if you wanna specify optionnal options to your request
+ * @throws {TypeError} throw an error if the type of argument collection is not a string OR argument query is not a object OR argument options is present and isn't a object
+ * @returns {number} - number of documents has been modified
+ */
+async updateMany(collection,query,update,options){
+        ValidatorMan.collectionValidation(collection)
+        ValidatorMan.queryValidation(query)
+        ValidatorMan.updateValidation(update)
+        ValidatorMan.optionsValidation(options)
+
+        let collect = await this.#getCo(collection)
+        let result = await collect.updateMany(query,update,options)
+        this.#client.close()
+        return result.modifiedCount
 }
 }
 module.exports = MongoMan;

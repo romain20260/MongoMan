@@ -18,6 +18,8 @@ static optionsValidation(options){
 (!options || typeof options === "object")? options : function(){throw new TypeError(`options input should be a valid object`)}();
 
 }
-
+static updateValidation(update){
+    (typeof update === "object")? update : function(){throw new TypeError(`update input should be a object`)}();    
+    }
 }
 module.exports = ValidatorMan;
