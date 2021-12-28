@@ -1,5 +1,5 @@
 {
-  "name": "mongoman",
+  "name": "wrap_mongoman",
   "version": "1.0.0",
   "description": "wrapper client mongoDB official ",
   "main": "MongoMan.js",

@@ -6,12 +6,12 @@
 -  easy-to-use simple crud asynchronus method
 ------------
 ### installation
-- download the binaries tar.gz
+
 use npm to install 
 ```bash
-$ npm install [path/package]
+$ npm install wrap_mongoman
 ``` 
-like par exemple npm install .\mongoman-1.0.0.tgz
+
 ------------
 
 ### started guide
@@ -30,7 +30,7 @@ TEST_DB_NAME = "mongoManTEST"
  - after that you just have to initialize MongoMan and to use the async method
 
 ```
-const MongoMan = require('MongoMan');
+const MongoMan = require('wrap_mongoman');
 
 let ManOne = new MongoMan()
 let collection = "NameOfCollection"
