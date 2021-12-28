@@ -1,10 +1,49 @@
-MONGOMAN is mongoclient wrapper 
+#  MONGOMAN
+######   a mongowrapper
 
-the idea is to simplifie the oroginal client(official)
-for execut CRUD basic easier in asynchronus
+- "KISS" CRUD for mongo database
+-  wrapp from mongo-driver official
+-  easy-to-use simple crud asynchronus method
+------------
+### installation
+- download the binaries tar.gz
+use npm to install 
+```bash
+$ npm install [path/package]
+``` 
+like par exemple npm install .\mongoman-1.0.0.tgz
+------------
 
-when you execute method you only care about handle the response if they are
-method are async, return a promise to consumme
-you can manage in your choice async/await Or .then()
+### started guide
+- after install the package you just have to setup your .env file 
+with 2 variable : <br>
+ DB_CONNECT<br>DB_NAME
+ ```
+DB_CONNECT= your url connection
+DB_NAME = your database
+TEST_DB_CONNECT = your url connection
+TEST_DB_NAME = "mongoManTEST"
 
-you can watch the test CRUD 
+
+ ```
+
+ - after that you just have to initialize MongoMan and to use the async method
+
+```
+const MongoMan = require('MongoMan');
+
+let ManOne = new MongoMan()
+let collection = "NameOfCollection"
+let query = {title:"hello World"}
+
+ManOne.insertOne(collection,query)
+```
+------------
+
+### documentation Api
+
+- you have auto-gen jsDoc on referenceDoc folder 
+
+
+------------
+##### more info

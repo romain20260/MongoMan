@@ -1,8 +1,7 @@
 const MongoMan = require('../MongoMan');
 
-let tester = new MongoMan();
-let collection = "testOne";
-//TODO make differentes solution to clean the chaining then()
+let tester = new MongoMan(process.env.TEST_DB_CONNECT,process.env.TEST_DB_NAME);
+let collection = "test";
 //simple CRUD test
 ///////create
 //1
@@ -11,15 +10,15 @@ tester.insertOne(collection,dataTestOne)
 
 .then(()=>{
 //2
-    let dataArr = [{title : "one"},{title : "two"},{title:"three"},{title : "azerty"}]
-    tester.insertMany(collection,dataArr)
+     let dataArr = [{title : "one"},{title : "two"},{title:"three"},{title : "azerty"}]
+     tester.insertMany(collection,dataArr)
 })
 .then(()=>{
-    ///////READ
-        //3
-        let queryOne = {title: "one"}
-        tester.findByOne(collection,queryOne)
-        .then((data) => console.log(data)) 
+//     ///////READ
+//         //3
+         let queryOne = {title: "one"}
+         tester.findByOne(collection,queryOne)
+         .then((data) => console.log(data)) 
 })
 .then(()=>{
             //4
@@ -40,5 +39,3 @@ tester.insertOne(collection,dataTestOne)
                                 tester.deleteMany(collection,queryDeleteMany)
                                 .then((m)=>console.log(m))
 })
-
-                    
