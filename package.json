@@ -1,6 +1,6 @@
 {
   "name": "wrap_mongoman",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "wrapper client mongoDB official ",
   "main": "MongoMan.js",
   "scripts": {
