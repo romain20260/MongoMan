@@ -43,6 +43,8 @@ ManOne.insertOne(collection,query)
 ### documentation Api
 
 - you have auto-gen jsDoc on referenceDoc folder 
+- or
+- https://mongoman.romainbousquie.com
 
 
 ------------
